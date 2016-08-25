@@ -1,3 +1,11 @@
+/*
+Shows reading lines from stdin and writing them to stdout.
+
+My instinct, coming from Python, was to deal with strings. But most of the
+time there is not need to understand what runes ("characters") a given
+sequence of butes corresponds to; there is no need to think in terms of
+"strings". All I want to do is split on newline (or 0xA).
+*/
 package echo
 
 import (
@@ -6,6 +14,7 @@ import (
 	"io"
 )
 
+// Reading strings with bufio.NewScanner
 func Echo1(in io.Reader, out io.Writer) {
 	scanner := bufio.NewScanner(in)
 	for scanner.Scan() {
@@ -13,6 +22,7 @@ func Echo1(in io.Reader, out io.Writer) {
 	}
 }
 
+// Reading strings with bufio.NewReader
 func Echo2(in io.Reader, out io.Writer) {
 	reader := bufio.NewReader(in)
 	for {
@@ -24,6 +34,7 @@ func Echo2(in io.Reader, out io.Writer) {
 	}
 }
 
+// Reading []byte with bufio.NewReader
 func Echo3(in io.Reader, out io.Writer) {
 	reader := bufio.NewReader(in)
 	for {
@@ -35,6 +46,7 @@ func Echo3(in io.Reader, out io.Writer) {
 	}
 }
 
+// Reading []byte with bufio.NewScanner
 func Echo4(in io.Reader, out io.Writer) {
 	scanner := bufio.NewScanner(in)
 	for scanner.Scan() {
@@ -42,7 +54,3 @@ func Echo4(in io.Reader, out io.Writer) {
 		out.Write(append(b, 0xA)) // append newline
 	}
 }
-
-//func main() {
-//	Echo1(os.Stdin, os.Stdout)
-//}

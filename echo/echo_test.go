@@ -2,8 +2,8 @@ package echo
 
 import (
 	"bytes"
-	"fmt"
 	"io"
+	"os"
 	"testing"
 )
 
@@ -39,10 +39,8 @@ func BenchmarkEcho4(b *testing.B) {
 }
 
 func ExampleEcho1() {
-	in := bytes.NewBufferString("hello\nworld\n") // "stdin"
-	out := new(bytes.Buffer)                      // "stdout"
-	Echo1(in, out)
-	fmt.Print(out.String())
+	b := bytes.NewBufferString("hello\nworld\n") // "this simulates stdin"
+	Echo1(b, os.Stdout)
 	// Output:
 	// hello
 	// world

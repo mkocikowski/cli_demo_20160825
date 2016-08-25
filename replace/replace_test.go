@@ -11,6 +11,7 @@ func TestReplace(t *testing.T) {
 		expect   string
 		inputs   []string
 	}{
+		// "\u4e16oo" == "世oo"
 		{Replace1, "Replace1", "Xoo", []string{"foo", "\u4e16oo"}},
 		{Replace2, "Replace2", "Xoo", []string{"foo", "\u4e16oo"}},
 		{Replace3, "Replace3", "Xoo", []string{"foo", "\u4e16oo"}},
@@ -19,7 +20,8 @@ func TestReplace(t *testing.T) {
 		for _, input := range test.inputs {
 			out := test.function(input)
 			if out != test.expect {
-				t.Errorf("function %q input %q expected %q got %q", test.name, input, test.expect, out)
+				t.Errorf("function %q input %q expected %q got %q",
+					test.name, input, test.expect, out)
 			}
 		}
 	}
