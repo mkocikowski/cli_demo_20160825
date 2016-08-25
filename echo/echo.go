@@ -1,4 +1,4 @@
-package cli_demo_20160825
+package echo
 
 import (
 	"bufio"
@@ -38,7 +38,7 @@ func Echo3(in io.Reader, out io.Writer) {
 func Echo4(in io.Reader, out io.Writer) {
 	scanner := bufio.NewScanner(in)
 	for scanner.Scan() {
-		b := scanner.Bytes()      // beware! see documentation
+		b := scanner.Bytes()      // beware! see bufio documentation
 		out.Write(append(b, 0xA)) // append newline
 	}
 }

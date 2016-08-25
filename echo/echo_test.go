@@ -1,4 +1,4 @@
-package cli_demo_20160825
+package echo
 
 import (
 	"bytes"
@@ -6,16 +6,6 @@ import (
 	"io"
 	"testing"
 )
-
-func ExampleEcho1() {
-	in := bytes.NewBufferString("hello\nworld\n") // "stdin"
-	out := new(bytes.Buffer)                      // "stdout"
-	Echo1(in, out)
-	fmt.Print(out.String())
-	// Output:
-	// hello
-	// world
-}
 
 type echoFunc func(io.Reader, io.Writer)
 
@@ -32,11 +22,11 @@ func TestEcho(t *testing.T) {
 	}
 }
 
-func BenchmarkEcho2(b *testing.B) {
+func BenchmarkEcho1(b *testing.B) {
 	in := "foo\nbar\n"
 	for i := 0; i < b.N; i++ {
 		out := new(bytes.Buffer)
-		Echo2(bytes.NewBufferString(in), out)
+		Echo1(bytes.NewBufferString(in), out)
 	}
 }
 
@@ -46,4 +36,14 @@ func BenchmarkEcho4(b *testing.B) {
 		out := new(bytes.Buffer)
 		Echo4(bytes.NewBufferString(in), out)
 	}
+}
+
+func ExampleEcho1() {
+	in := bytes.NewBufferString("hello\nworld\n") // "stdin"
+	out := new(bytes.Buffer)                      // "stdout"
+	Echo1(in, out)
+	fmt.Print(out.String())
+	// Output:
+	// hello
+	// world
 }
